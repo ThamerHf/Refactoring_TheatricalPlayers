@@ -4,8 +4,8 @@ import java.lang.StringBuilder;
 
 public class StatementPrinter {
 
-  public String print(Invoice invoice, Map<String, Play> plays) {
-    int totalAmount = 0;
+  public StringBuilder print(Invoice invoice, Map<String, Play> plays) {
+    float totalAmount = 0;
     int volumeCredits = 0;
     StringBuilder result = new StringBuilder(String.format("Statement for %s\n", invoice.customer));
 
@@ -13,21 +13,21 @@ public class StatementPrinter {
 
     for (Performance perf : invoice.performances) {
       Play play = plays.get(perf.playID);
-      int thisAmount = 0;
+      float thisAmount = 0;
 
       switch (play.type) {
         case "tragedy":
-          thisAmount = 40000;
+          thisAmount = 400;
           if (perf.audience > 30) {
-            thisAmount += 1000 * (perf.audience - 30);
+            thisAmount += 10 * (perf.audience - 30);
           }
           break;
         case "comedy":
-          thisAmount = 30000;
+          thisAmount = 300;
           if (perf.audience > 20) {
-            thisAmount += 10000 + 500 * (perf.audience - 20);
+            thisAmount += 100 + 5 * (perf.audience - 20);
           }
-          thisAmount += 300 * perf.audience;
+          thisAmount += 3 * perf.audience;
           break;
         default:
           throw new Error("unknown type: ${play.type}");
@@ -39,7 +39,7 @@ public class StatementPrinter {
       if ("comedy".equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
 
       // print line for this order
-      result += String.format("  %s: %s (%s seats)\n", play.name, frmt.format(thisAmount / 100), perf.audience);
+      result.append(String.format("  %s: %s (%s seats)\n", play.name, frmt.format(thisAmount), perf.audience));
       totalAmount += thisAmount;
     }
     result.append(String.format("Amount owed is %s\nYou earned %s credits\n", frmt.format(totalAmount), volumeCredits));
