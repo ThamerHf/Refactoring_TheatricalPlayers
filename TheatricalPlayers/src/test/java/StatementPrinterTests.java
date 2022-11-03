@@ -10,15 +10,19 @@ public class StatementPrinterTests {
 
     @Test
     void exampleStatement() {
+        Play play1 = new PlayTragedy("Hamlet", "tragedy");
+        Play play2 = new PlayComedy("As You Like It", "comedy");
+        Play play3 = new PlayTragedy("Othello", "tragedy");
+
         Map<String, Play> plays = Map.of(
-                "hamlet",  new Play("Hamlet", "tragedy"),
-                "as-like", new Play("As You Like It", "comedy"),
-                "othello", new Play("Othello", "tragedy"));
+                play1.name, play1,
+                play2.name, play2,
+                play3.name, play3);
 
         Invoice invoice = new Invoice("BigCo", List.of(
-                new Performance("hamlet", 55),
-                new Performance("as-like", 35),
-                new Performance("othello", 40)));
+            new Performance(play1.name, 55),
+            new Performance(play2.name, 35),
+            new Performance(play3.name, 40)));
 
         StatementPrinter statementPrinter = new StatementPrinter();
         var result = statementPrinter.print(invoice, plays);
@@ -28,13 +32,16 @@ public class StatementPrinterTests {
 
     @Test
     void statementWithNewPlayTypes() {
+        Play play1 = new PlayComedy("Henry V", "history");
+        Play play2 = new PlayTragedy("As You Like It", "pastoral");
+
         Map<String, Play> plays = Map.of(
-                "henry-v",  new Play("Henry V", "history"),
-                "as-like", new Play("As You Like It", "pastoral"));
+            play1.name, play1,
+            play2.name, play2);
 
         Invoice invoice = new Invoice("BigCo", List.of(
-                new Performance("henry-v", 53),
-                new Performance("as-like", 55)));
+                new Performance(play1.name, 53),
+                new Performance(play2.name, 55)));
 
         StatementPrinter statementPrinter = new StatementPrinter();
         Assertions.assertThrows(Error.class, () -> {

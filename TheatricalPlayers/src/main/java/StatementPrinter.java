@@ -24,17 +24,10 @@ public class StatementPrinter {
 
       switch (play.type) {
         case "tragedy":
-          thisAmount = 400;
-          if (perf.audience > 30) {
-            thisAmount += 10 * (perf.audience - 30);
-          }
+          thisAmount = play.playAmount(perf);
           break;
         case "comedy":
-          thisAmount = 300;
-          if (perf.audience > 20) {
-            thisAmount += 100 + 5 * (perf.audience - 20);
-          }
-          thisAmount += 3 * perf.audience;
+          thisAmount = play.playAmount(perf);
           break;
         default:
           throw new Error("unknown type: ${play.type}");
