@@ -12,6 +12,6 @@ class Play {
 	}
 
    	public int playCredit(Performance perf){
-		return -1;
+		return 0;
 	}
 }
