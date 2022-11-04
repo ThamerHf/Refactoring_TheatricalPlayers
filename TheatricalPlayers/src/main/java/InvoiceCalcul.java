@@ -43,10 +43,10 @@ public class InvoiceCalcul{
     public StringBuilder toHTML(Invoice invoice, Map<String, Play> plays){
         float totalAmount = 0;
         int volumeCredits = 0;
-        StringBuilder result = new StringBuilder(String.format("<html> \n<head> Invoice </head> \n<body>\n <h1> Invoice </h1>\n"));
+        StringBuilder result = new StringBuilder(String.format("<html> \n<head> <title> Invoice </title></head> \n<body>\n <h1> Invoice </h1>\n"));
 
-        result.append(String.format("<ul> <li>", invoice.customer ,"</li><ul>"));
-        
+        result.append(String.format("<ul> <li> <b> Client : </b> %s </li> </ul> \n", invoice.customer));
+        result.append("<table> \n <tr> \n <td> Piece </td> \n <td> Seats sold </td> \n <td> Price </td> \n </tr> \n");
         NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
 
         for (Performance perf : invoice.performances) {
@@ -64,16 +64,19 @@ public class InvoiceCalcul{
             throw new Error("unknown type: ${play.type}");
         }
 
+        // print line for this order
+        result.append(String.format("<tr> \n <td> %s </td> \n <td> %d </td> \n <td> $%s </td> \n </tr> \n", play.name, perf.audience, frmt.format(thisAmount)));
+        
         // add volume credits
         volumeCredits += Math.max(perf.audience - 30, 0);
         // add extra credit for every ten comedy attendees
         if ("comedy".equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
 
-        // print line for this order
-        result.append(String.format("  %s: %s (%s seats)\n", play.name, frmt.format(thisAmount), perf.audience));
         totalAmount += thisAmount;
         }
-        result.append(String.format("Amount owed is %s\nYou earned %s credits\n", frmt.format(totalAmount), volumeCredits));
+        result.append(String.format("<tr> \n <td> <b>Total Owned :</b> </td> \n <td> $%f </td> \n </tr> \n", frmt.format(totalAmount)));
+        result.append(String.format("<tr> \n <td> <b>Fidelity Points Earned :</b> </td> \n <td> %d </td> \n </tr> \n" ,volumeCredits));
+        result.append("</table> \n </body> \n </html>");
         return result;
     }
     
