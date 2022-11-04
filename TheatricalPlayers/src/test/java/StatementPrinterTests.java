@@ -10,9 +10,9 @@ public class StatementPrinterTests {
 
     @Test
     void exampleStatement() {
-        Play play1 = new PlayTragedy("Hamlet", "tragedy");
-        Play play2 = new PlayComedy("As You Like It", "comedy");
-        Play play3 = new PlayTragedy("Othello", "tragedy");
+        Play play1 = new PlayTragedy("Hamlet");
+        Play play2 = new PlayComedy("As You Like It");
+        Play play3 = new PlayTragedy("Othello");
 
         Map<String, Play> plays = Map.of(
                 play1.name, play1,
@@ -32,8 +32,8 @@ public class StatementPrinterTests {
 
     @Test
     void statementWithNewPlayTypes() {
-        Play play1 = new PlayComedy("Henry V", "history");
-        Play play2 = new PlayTragedy("As You Like It", "pastoral");
+        Play play1 = new Play("Henry V", "history");
+        Play play2 = new Play("As You Like It", "pastoral");
 
         Map<String, Play> plays = Map.of(
             play1.name, play1,
