@@ -32,8 +32,8 @@ public class StatementPrinterTests {
 
     @Test
     void statementWithNewPlayTypes() {
-        Play play1 = new Play("Henry V", "history");
-        Play play2 = new Play("As You Like It", "pastoral");
+        Play play1 = new OtherPlay("Henry V", "history");
+        Play play2 = new OtherPlay("As You Like It", "pastoral");
 
         Map<String, Play> plays = Map.of(
             play1.name, play1,

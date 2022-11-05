@@ -1,9 +1,11 @@
 class PlayComedy extends Play{
+    private String type;
+
     public PlayComedy(String name) {
-        super(name, "comedy");
+        super(name);
+        this.type = "comedy";
     }
 
-    @Override
     public float playAmount(Performance perf){
         float thisAmount = 300; //basic gain
           if (perf.audience > 20) {
@@ -14,7 +16,6 @@ class PlayComedy extends Play{
           return thisAmount;
     }
 
-    @Override
     public int playCredit(Performance perf){
         int volumeCredits = 0;
         volumeCredits += Math.max(perf.audience - 30, 0);
@@ -22,4 +23,7 @@ class PlayComedy extends Play{
         return volumeCredits;
     }
 
+    public String getType(){
+		return this.type;
+	}
 }
