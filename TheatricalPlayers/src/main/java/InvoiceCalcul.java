@@ -68,6 +68,8 @@ public class InvoiceCalcul{
         result.append(String.format("<tr> \n <td colspan = '2'> <b>Total Owned :</b> </td> \n <td> $%s </td> \n </tr> \n", frmt.format(totalAmount)));
         result.append(String.format("<tr> \n <td colspan = '2'> <b>Fidelity Points Earned :</b> </td> \n <td> %d </td> \n </tr> \n" ,volumeCredits));
         result.append("</table> \n </body> \n </html>");
+
+         
         return result;
     }
     
