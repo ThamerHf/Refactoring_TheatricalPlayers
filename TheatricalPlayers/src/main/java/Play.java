@@ -1,17 +1,12 @@
-class Play {
+abstract class Play {
 	public String name;
-	public String type;
  
-  	public Play(String name, String type) {
+  	public Play(String name) {
    		this.name = name;
-    	this.type = type;
 	}
   
-	public float playAmount(Performance perf){
-		return -1;
-	}
+	abstract float playAmount(Performance perf);
 
-   	public int playCredit(Performance perf){
-		return 0;
-	}
+   	abstract int playCredit(Performance perf);
+
 }
