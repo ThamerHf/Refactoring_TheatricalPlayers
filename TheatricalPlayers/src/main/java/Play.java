@@ -5,8 +5,24 @@ abstract class Play {
    		this.name = name;
 	}
   
+
+/********************************************************************/
+/*playAmount: generate the amount for a given performance			*/
+/*                                                                	*/
+/*Input: Performance perf					                      	*/
+/*                                                                	*/
+/*Output: Float the amount					                		*/
+/********************************************************************/
 	abstract float playAmount(Performance perf);
 
-   	abstract int playCredit(Performance perf);
+
+/********************************************************************/
+/*playCredit: generate the credit for a given performance			*/
+/*                                                                	*/
+/*Input: Performance perf					                      	*/
+/*                                                                	*/
+/*Output: Int the credit					                		*/
+/********************************************************************/
+	abstract int playCredit(Performance perf);
 
 }

@@ -4,9 +4,14 @@ import java.lang.StringBuilder;
 
 public class InvoiceCalcul{
     public InvoiceCalcul(){}
-    /********************************************************************/
-    /* La methode toText() permet de génerer le résultat en format text */
-    /********************************************************************/
+
+/********************************************************************/
+/*toText: generate an invoice in text form for a given customer		*/
+/*                                                                	*/
+/*Input: invoice and a Map contains plays	                      	*/
+/*                                                                	*/
+/*Output: a String representing the invoice                 		*/
+/********************************************************************/
 
     public StringBuilder toText(Invoice invoice, Map<String, Play> plays){
         float totalAmount = 0;
@@ -35,6 +40,15 @@ public class InvoiceCalcul{
         result.append(String.format("Amount owed is %s\nYou earned %s credits\n", frmt.format(totalAmount), volumeCredits));
         return result;
     }
+
+
+/********************************************************************/
+/*toHTML: generate an invoice in HTML form for a given customer		*/
+/*                                                                	*/
+/*Input: invoice and a Map contains plays	                      	*/
+/*                                                                	*/
+/*Output: a String representing the invoice                 		*/
+/********************************************************************/
 
     public StringBuilder toHTML(Invoice invoice, Map<String, Play> plays){
         float totalAmount = 0;
